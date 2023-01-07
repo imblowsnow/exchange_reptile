@@ -47,7 +47,7 @@ async function do_exchange(name, currency) {
     if (!matches) return null;
     let price = parseFloat(matches[1]);
 
-    console.log(`获取${name}汇率`,price);
+    // console.log(`获取${name}汇率`,price);
 
     return {
         name,
