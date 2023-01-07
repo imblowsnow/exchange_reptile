@@ -43,10 +43,9 @@ async function do_exchange(name, currency) {
     let res = await axios("https://chl.cn/?" + currency);
     let $ = cheerio.load(res.data);
     let body = $("div.Lt").text()
-    let matches = body.match(/=([\d\.]+)元/);
+    let matches = body.match(/(\d+)[^\d+]*?=([\d\.]+)元/);
     if (!matches) return null;
-    let price = parseFloat(matches[1]);
-
+    let price = parseFloat(matches[2]) / parseInt(matches[1]);
     // console.log(`获取${name}汇率`,price);
 
     return {
