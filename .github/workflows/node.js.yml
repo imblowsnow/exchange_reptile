@@ -8,6 +8,9 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+#on:
+#  schedule:
+#    - cron: '0 */6 * * *'
 
 jobs:
   build:
@@ -28,5 +31,10 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm run build --if-present
-    - run: git add exchange.json
-    - run: git commit -m "更新汇率数据"
+    - name: 更新汇率数据
+      run: |
+        git config --global user.email imblowsnow@gmail.com
+        git config --global user.name blowsnow
+        git add exchange.json
+        git commit -m "更新汇率数据" -a
+        git push
